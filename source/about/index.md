@@ -7,7 +7,7 @@ date: 2022-12-04 23:11:30
 
 Github: https://github.com/dirilin
 Linkedin: https://www.linkedin.com/in/wenhao-lin-493580255/
-mail: linwenhao@stu.hit.edu.cn
+mail: [linwenhao@stu.hit.edu.cn](mailto:linwenhao@stu.hit.edu.cn)
 
 ## 教育经历
 
