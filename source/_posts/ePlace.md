@@ -1,7 +1,7 @@
 ---
-title: 阅读笔记-ePlace
+title: ePlace
 date: 2023-05-07 23:12:12
-categories: Notes
+categories: Paper-reading
 tags:
 mathjax: true
 ---
