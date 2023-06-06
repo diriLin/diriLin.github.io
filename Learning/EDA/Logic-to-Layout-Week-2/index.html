@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Logic to Layout Week 2 | diri!</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - 共 $1 行","copy":"复制","copyFinish":"复制成功","expand":"展开"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/friendly-links/"><span class="navItemTitle">Friends</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">About</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Logic to Layout Week 2</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2023-03-21T02:52:59.000Z" id="date"> 2023-03-21</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2023-06-05T13:15:33.511Z" id="updated"> 2023-06-05</time></div></span></div></div><hr><div id="post-content"><p>今天是去南京旅游的第三天，前两天走了平均走了35000+步，今天早上就权当休息了，不出去走，来写写博客。</p>
+<h2 id="Binary-Decision-Diagrams-二分决策图，BDDs"><a href="#Binary-Decision-Diagrams-二分决策图，BDDs" class="headerlink" title="Binary Decision Diagrams(二分决策图，BDDs)"></a>Binary Decision Diagrams(二分决策图，BDDs)</h2><p>一种比<a target="_blank" rel="noopener" href="https://diri-lin.top/Learning/EDA/Logic-to-Layout-Week-1/#Cube-List">Cube List</a>更powerful的数据结构，用来表达多输入多输出的电路。常用的是Reduced Ordered Binary Decision Diagram(ROBDD，课程后面有很多ROBDD和BDD的混用，实际指代的都是ROBDD)：</p>
+<ul>
+<li><p>Ordered</p>
+<ul>
+<li>名字的第二个单词，意思是这个图的根节点到叶子节点（函数值）的决策过程中出现的变量符合一个给定的顺序，可以有某些变量缺省。</li>
+</ul>
+</li>
+<li><p>Canonical form(规范型)</p>
+<ul>
+<li>对一个函数来说，给定<strong>同样的变量顺序</strong>，ROBDD给出的图应该是相同的。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321113824.png#pic_center" style="zoom:120%;"></p>
+<center>BDD示例，并没有Reduced and ordered</center>
+
+<h3 id="Ordering"><a href="#Ordering" class="headerlink" title="Ordering"></a>Ordering</h3><p>视频说的是No universal solution，给出了一些办法：</p>
+<ul>
+<li>Characterization: know which problems never make nice BDDs (eg, multipliers)</li>
+<li>Dynamic ordering: let the BDD software package pick the order… on the fly（这是认真的吗？）</li>
+<li>启发式的规则：相关的输入变量应该尽可能地放在一起<ul>
+<li>给出了一个例子：<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321123437.png"><br>如果先算a再算b，由于a1, a2, a3之间没有关系，决策树会完全地展开，这导致BDD很庞大。</li>
+</ul>
+</li>
+</ul>
+<p>但是左边的图为什么可以这么reduced? 接下来将ROBDD的build up.</p>
+<h3 id="建立ROBDD的方法"><a href="#建立ROBDD的方法" class="headerlink" title="建立ROBDD的方法"></a>建立ROBDD的方法</h3><p>有两种方法，第一种是从BDT简化得来：</p>
+<h4 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h4><p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321124038.png"></p>
+<center>二分决策树BDT</center>
+
+<p>BDT就不必多说了，要注意必须是ordered. 然后做以下几类reduction: </p>
+<ul>
+<li>合并0节点和1节点；</li>
+<li>合并同构(isomorphic)节点，其中同构是指：<ul>
+<li>节点代表的变量相同；</li>
+<li>它们的低指针指向相同的child, 高指针也一样；<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321124721.png"><center>两个x的指针指向相同的children</center></li>
+</ul>
+</li>
+<li>删除冗余的节点<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321124948.png"><center>x无论取什么值对下一步决策没影响，因此可以直接删去</center>
+
+</li>
+</ul>
+<p>迭代进行以上操作，直至图不能够再reduce. 但实际不这么建立ROBDD，因为光是建立BDT就已经是指数时间复杂度。</p>
+<h4 id="自底而上，gate-by-gate"><a href="#自底而上，gate-by-gate" class="headerlink" title="自底而上，gate by gate"></a>自底而上，gate by gate</h4><p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321130142.png"><br>呃呃，这个课程说大概是这么干的，却没有说具体怎么做，比如得到T1和T2之后具体怎么进行Or的操作。我参考了<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/397164596">jacob的文章</a>，他以<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="7.336ex" height="1.353ex" role="img" focusable="false" viewBox="0 -448 3242.4 598"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mi" transform="translate(1175.2,0)"><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path data-c="72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z" transform="translate(500,0)"></path></g><g data-mml-node="msub" transform="translate(2233.9,0)"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>为例（变量顺序是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex;" xmlns="http://www.w3.org/2000/svg" width="5.57ex" height="1.439ex" role="img" focusable="false" viewBox="0 -442 2461.8 636"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(1008.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(1453.2,0)"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>）：</p>
+<blockquote>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/v2-e68d2436b70b681876f01b88e392b412_720w.webp"><br>“隐式扩展”指的是对齐两边的变量，之前在reduce的时候讲过要删除冗余的变量，此处用相反的方法加回去，先检查<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="2.282ex" height="1.339ex" role="img" focusable="false" viewBox="0 -442 1008.6 592"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container>：<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/v2-6945f2d8a7b5437ee531e5ec0478b33f_720w.webp"><br>然后是<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex;" xmlns="http://www.w3.org/2000/svg" width="2.282ex" height="1.339ex" role="img" focusable="false" viewBox="0 -442 1008.6 592"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(605,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container>：<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/v2-4210a6bb577f1067c88ade16a4beb282_720w.webp"><br>对齐之后，同时在两个图上进行遍历，比如上图就连续两次决策为0，发现结果都为0；然后决策为0-1，得到一个结果是0，一个结果是1，那么就对这两个常数结果进行<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="2.018ex" height="1.036ex" role="img" focusable="false" viewBox="0 -448 892 458"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path data-c="72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z" transform="translate(500,0)"></path></g></g></g></svg></mjx-container>运算：<br><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/v2-1934677a361b2b63b8120aa9ec1c86c0_720w.webp"></p>
+</blockquote>
+<p>这就是总体的思路。具体的操作，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/397164596">jacob</a>总结为：</p>
+<blockquote>
+<p>并行地遍历两个图，在两个给定的图中始终同时沿着0边或1边移动；</p>
+<p>当一个变量在一个图中存在，而不在另一个图中时，我们就像它存在并且有相同的high和low子节点一样继续进行（前面提到隐式地扩展，即实际上并不会创建节点，而是直接递归调用下去，后面的代码分析中可以看到，这里采用扩展结点是为了方便说明）；</p>
+<p>当到达两个图的终端结点0或1时，对这些常量应用布尔运算并返回相应的常量;</p>
+<p>如果对high和low子节点的运算返回相同的节点，不构造一个新节点，而只是返回在树中已经获得的单个节点。避免冗余；</p>
+<p>如果将要构造一个已经在结果图中某处的节点(也就是说，具有相同的变量标签和相同的后续节点)，不要创建一个新的副本，而只是返回已经存在的节点。</p>
+</blockquote>
+<h2 id="SAT"><a href="#SAT" class="headerlink" title="SAT"></a>SAT</h2><p>SAT问题就是说，对于一个布尔表达式，是否有一组对变量的赋值使布尔表达式的值为1. 当然可以用BDD的方法来解，但是BDD相当于求出了每一组输入的函数值，这对SAT来说太多了；需要一种新的数据结构和快速的解法来应付这个问题。</p>
+<p>有很多问题可以转化为SAT问题，课程给出的例子是判断两个布尔函数F和G是否是等价的：</p>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321230445.png"></p>
+<h3 id="Conjunctive-Normal-Form-合取范式，CNF"><a href="#Conjunctive-Normal-Form-合取范式，CNF" class="headerlink" title="Conjunctive Normal Form(合取范式，CNF)"></a>Conjunctive Normal Form(合取范式，CNF)</h3><p>数理逻辑的东西都忘好多了：</p>
+<ul>
+<li>若p是一个原子公式(atom)，则p和p’称为文字(literal)</li>
+<li>文字的析取被称为子句(clause)</li>
+<li>子句的合取被称为合取范式(CNF)</li>
+</ul>
+<p>CNF的好处在于，如果有一个子句的值为0，那就可以判断整个表达式的值不可能为1了，需要寻找其他的赋值来满足。</p>
+<h3 id="gate-by-gate建立布尔函数的CNF"><a href="#gate-by-gate建立布尔函数的CNF" class="headerlink" title="gate by gate建立布尔函数的CNF"></a>gate by gate建立布尔函数的CNF</h3><p>这里的CNF里面的文字并不全是布尔函数的输入，也包含中间wire的值和输出，因此我觉得课程把它叫做布尔函数的CNF不是特别合适，实际的意思是可以用来进行下面的SAT问题BCP求解的CNF输入形式。</p>
+<h4 id="Gate-consistency-function-逻辑门一致性函数"><a href="#Gate-consistency-function-逻辑门一致性函数" class="headerlink" title="Gate consistency function(逻辑门一致性函数)"></a>Gate consistency function(逻辑门一致性函数)</h4><p>上面提到的CNF含有中间wire的值和输出，它们本来应该是输入（或者某门的输入）的函数，这里把它们变成CNF的变量，其实是将它们和输入（或者某门的输入）的相关性用别的方式去表达了，而这个“别的方式”，就是Gate consistency function. 比如对于与非门<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex;" xmlns="http://www.w3.org/2000/svg" width="6.361ex" height="2.473ex" role="img" focusable="false" viewBox="0 -1011 2811.6 1093"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mo" transform="translate(797.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mover" transform="translate(1853.6,0)"><g data-mml-node="mrow"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(529,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g><g data-mml-node="mo" transform="translate(0,626)"><svg width="958" height="237" x="0" y="148" viewBox="239.5 148 958 237"><path data-c="2013" d="M0 248V285H499V248H0Z" transform="scale(2.874,1)"></path></svg></g></g></g></g></svg></mjx-container>，它的Gate consistency function是</p>
+<script type="math/tex; mode=display">
+\varPhi_d=(d==\overline{ab})=(a+d)(b+d)(\overline{a}+\overline{b}+\overline{d})</script><p>要求这个函数的值为1，也就是要求<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="9.881ex" height="2.853ex" role="img" focusable="false" viewBox="0 -1011 4367.6 1261"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mo" transform="translate(1186.8,0)"><g data-mml-node="text"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="text" transform="translate(778,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g></g><g data-mml-node="mover" transform="translate(3020.6,0)"><g data-mml-node="mrow"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(529,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g><g data-mml-node="mo" transform="translate(0,626)"><svg width="958" height="237" x="0" y="148" viewBox="239.5 148 958 237"><path data-c="2013" d="M0 248V285H499V248H0Z" transform="scale(2.874,1)"></path></svg></g></g><g data-mml-node="mo" transform="translate(3978.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>，<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="1.176ex" height="1.593ex" role="img" focusable="false" viewBox="0 -694 520 704"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></svg></mjx-container>确实能代表这个逻辑门的输出。</p>
+<p>课程提出的CNF的形式是：</p>
+<script type="math/tex; mode=display">
+\text{CNF}=(\text{output var})\prod_{k\in{\text{gates}}}\varPhi_k</script><p>要使原来的布尔函数可满足，首先输出变量肯定为1，其次，所有逻辑门的一致性函数都为1，这样输出变量和中间变量才能代表上游的逻辑门的运算结果；反过来，CNF的SAT的一组解，将里面的中间变量和输出变量去掉，剩余的输入变量也必是原函数SAT问题的解。因此：</p>
+<p><strong><center>“原函数的SAT问题有无解”与“其CNF的SAT问题有无解”是等价的。</center></strong></p>
+<p>课程也给出了一些常见的CNF转化公式：</p>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230321233157.png"></p>
+<h3 id="Boolean-Constraint-Propagation-布尔约束传播，BCP"><a href="#Boolean-Constraint-Propagation-布尔约束传播，BCP" class="headerlink" title="Boolean Constraint Propagation(布尔约束传播，BCP)"></a>Boolean Constraint Propagation(布尔约束传播，BCP)</h3><p>递归地求解CNF的SAT问题。递归基：</p>
+<ul>
+<li>SAT: 找到一组赋值，使得这个CNF的子句全是1</li>
+<li>UNSAT: 存在（与SAT的）矛盾(conflict)，至少有一个子句的值为0</li>
+</ul>
+<p>否则至少有一个子句的值未知。我们需要选择一个未赋值的变量进行赋值，使得问题的规模变小：</p>
+<ol>
+<li>如果存在单文子的子句(unit)，则对这个变量赋值使unit的值为1</li>
+<li>否则选一个未赋值变量，赋值为0或者1</li>
+</ol>
+<p>然后进行DFS搜索，当求解到UNSAT的时候，需要进行回退，回退必须包含一次上述情况2的取消，因为情况1的赋值是必然的，并没有剪除可能的分支。如果回退到了问题的根节点，则说明SAT无解。</p>
+<p>对于用gate by gate建立的CNF，显然第一个unit就是输出变量。，而且下游的逻辑门输出必然在上游的变量之前变成unit，本质是从输出向输入方向倒退的搜索过程。</p>
+<p>明天去到武汉就没电脑喽，就写到这里。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/Learning/EDA/Logic-to-Layout-Week-3/">← Next Logic to Layout Week 3</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/Learning/EDA/Logic-to-Layout-Week-1/">Logic to Layout Week 1 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="文章目录">≡</a><a id="color-mode" onClick="colorMode.change()" title="切换主题"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/megumi.jpg" alt="Logo"></a><h1 id="Dr"><a href="/">失学青年 diri酱</a></h1><div id="description"><p>摸鱼一念起，刹觉天地宽</p></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Decision-Diagrams-%E4%BA%8C%E5%88%86%E5%86%B3%E7%AD%96%E5%9B%BE%EF%BC%8CBDDs"><span class="toc-number">1.</span> <span class="toc-text">Binary Decision Diagrams(二分决策图，BDDs)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ordering"><span class="toc-number">1.1.</span> <span class="toc-text">Ordering</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8BROBDD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">建立ROBDD的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Reduce"><span class="toc-number">1.2.1.</span> <span class="toc-text">Reduce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%BA%95%E8%80%8C%E4%B8%8A%EF%BC%8Cgate-by-gate"><span class="toc-number">1.2.2.</span> <span class="toc-text">自底而上，gate by gate</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAT"><span class="toc-number">2.</span> <span class="toc-text">SAT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Conjunctive-Normal-Form-%E5%90%88%E5%8F%96%E8%8C%83%E5%BC%8F%EF%BC%8CCNF"><span class="toc-number">2.1.</span> <span class="toc-text">Conjunctive Normal Form(合取范式，CNF)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gate-by-gate%E5%BB%BA%E7%AB%8B%E5%B8%83%E5%B0%94%E5%87%BD%E6%95%B0%E7%9A%84CNF"><span class="toc-number">2.2.</span> <span class="toc-text">gate by gate建立布尔函数的CNF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gate-consistency-function-%E9%80%BB%E8%BE%91%E9%97%A8%E4%B8%80%E8%87%B4%E6%80%A7%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">Gate consistency function(逻辑门一致性函数)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean-Constraint-Propagation-%E5%B8%83%E5%B0%94%E7%BA%A6%E6%9D%9F%E4%BC%A0%E6%92%AD%EF%BC%8CBCP"><span class="toc-number">2.3.</span> <span class="toc-text">Boolean Constraint Propagation(布尔约束传播，BCP)</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
