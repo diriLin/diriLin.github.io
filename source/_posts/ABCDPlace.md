@@ -26,7 +26,7 @@ Placement可以分为GP, legalization以及DP(Detail Placement)三个部分，�
 
 + 全局交换（Global Swap）。对特定的一个cell，在全局范围内寻找另一个cell使得它们交换之后对HPWL的改进最大，然后交换之。使用启发式的方法来寻找搜索区域。
 
-+ 本地重排（Local Reordering）。使用滑动窗口来选择$k$个cell，这$k$个cell可以形成$k!$个排列，然后在这些排列中寻找其中对HPWL最优的排列。由于复杂度是阶乘级别，$k$不会选得很大。
++ 本地重排（Local Reordering）。***在同一个行内***，使用滑动窗口来选择$k$个cell，这$k$个cell可以形成$k!$个排列，然后在这些排列中寻找其中对HPWL最优的排列。由于复杂度是阶乘级别，$k$不会选得很大。
 
 还提到了设计并行算法的时候必须考虑到GPU结构的性质：
 
@@ -85,11 +85,9 @@ $$
 
 <img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230606211151.png" style="zoom:50%;" />
 
-
-
 时间开销的主要部分是`CalcSwapCosts`和`CollectCands`：
 
-<img src="C:\Users\19011\AppData\Roaming\Typora\typora-user-images\image-20230606211313064.png" alt="image-20230606211313064" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230607162449.png" style="zoom:50%;" />
 
 并行版本的算法：
 
@@ -108,3 +106,11 @@ $$
 最后的`ApplyCand`可能存在依赖关系，比如a/b都决定和c交换，因此不能够并行的执行，但是这一步并不是性能的瓶颈。
 
 ## 本地重排
+
+<img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230607162735.png" style="zoom:50%;" />
+
+本文通过三个方面来提高本地重排算法的并行度：
+
++ 并行枚举：长度为$k$的滑动窗口内，并行计算$k!$个排列的HPWL（或者改进）。由于$k!$不大，这并不能在GPU上很好地提升速度。
++ 并行窗口：如上图Step1所示，多个窗口内的重排互不相关，因此可以进行并行。
++ 独立行组：如上图(b)所示，row1和row4没有cell直接被net连接，将他们放到一个组内。
