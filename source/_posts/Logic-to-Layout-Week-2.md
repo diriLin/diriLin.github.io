@@ -1,11 +1,9 @@
 ---
 title: Logic to Layout Week 2
 date: 2023-03-21 10:52:59
-categories:
-- Learning
-- EDA
+categories: Learning
+tags: EDA
 mathjax: true
-tags:
 ---
 
 今天是去南京旅游的第三天，前两天走了平均走了35000+步，今天早上就权当休息了，不出去走，来写写博客。

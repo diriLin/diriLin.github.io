@@ -1,11 +1,9 @@
 ---
 title: Logic to Layout Week 4
-categories:
-- Learning
-- EDA
+categories: Learning
+tags: EDA
 mathjax: true
 date: 2023-04-01 17:18:17
-tags:
 ---
 
 ## Divisor Extraction

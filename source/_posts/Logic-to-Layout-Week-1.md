@@ -1,10 +1,8 @@
 ---
 title: Logic to Layout Week 1
 date: 2023-03-11 00:49:53
-categories:
-- Learning
-- EDA
-tags:
+categories: Learning
+tags: EDA
 mathjax: true
 ---
 
