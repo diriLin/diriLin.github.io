@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-cn" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CUDA-C 学习笔记 | diri!</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - 共 $1 行","copy":"复制","copyFinish":"复制成功","expand":"展开"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/friendly-links/"><span class="navItemTitle">Friends</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">About</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>CUDA-C 学习笔记</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2023-07-04T15:54:15.000Z" id="date"> 2023-07-04</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2023-07-05T02:14:16.558Z" id="updated"> 2023-07-05</time></div></span></div></div><hr><div id="post-content"><p>猛摆烂，又开一坑。看的书是<a target="_blank" rel="noopener" href="https://www.amazon.com/Professional-CUDA-Programming-John-Cheng/dp/1118739329">Professional CUDA C Programming</a>, 然后参考<a target="_blank" rel="noopener" href="https://face2ai.com/program-blog/#GPU%E7%BC%96%E7%A8%8B%EF%BC%88CUDA%EF%BC%89">谭升的博客</a>（在CUDA-C学习笔记系列中简称“博客”），我觉得肯定比我讲得好得多，因此我写的只供自己记录用。在这篇发布的时候，我只看到了Chapter3, 因此可能很多理解尚需完善。</p>
+<h2 id="Chapter-1-Heterogeneous-Parallel-Computing-with-CUDA"><a href="#Chapter-1-Heterogeneous-Parallel-Computing-with-CUDA" class="headerlink" title="Chapter 1: Heterogeneous Parallel Computing with CUDA"></a>Chapter 1: Heterogeneous Parallel Computing with CUDA</h2><p>使用CPU+GPU的异构方式来处理并行计算任务：</p>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230705011539.png" style="zoom: 50%;"></p>
+<p>程序猿要做的事情是：</p>
+<ul>
+<li>在主机(host, CPU)上编写并运行程序，准备并行计算的指令和数据</li>
+<li>将并行计算数据通过总线发送到设备(device, GPU)上</li>
+<li>调用核函数，让设备进行并行计算</li>
+<li>将计算结果下载回主机</li>
+</ul>
+<p>为什么要做大规模的并行计算，为什么不用CPU做大规模的并行计算而用GPU，这里不再赘述（可以参考<a target="_blank" rel="noopener" href="https://face2ai.com/program-blog/#GPU%E7%BC%96%E7%A8%8B%EF%BC%88CUDA%EF%BC%89">博客</a>）。但是，这说明设备（的架构）是很重要的，因此在编写并行计算程序的时候，需要根据GPU的架构和性质尽量压榨其并行能力。</p>
+<p>最后，nvidia的显卡被广泛应用于高性能计算领域，而CUDA是建立在nvidia GPU上的平台，提供了大量API供程序猿操作设备完成计算，这就是需要学习CUDA的原因。</p>
+<h2 id="Chapter-2-CUDA-Programming-Model"><a href="#Chapter-2-CUDA-Programming-Model" class="headerlink" title="Chapter 2: CUDA Programming Model"></a>Chapter 2: CUDA Programming Model</h2><p>这章讲CUDA的编程模型。CUDA-C的程序大概这样：</p>
+<p><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/20230705094911.png" style="zoom: 33%;"></p>
+<p>主进程运行在主机上，并行计算的数据准备好后：</p>
+<ul>
+<li>将并行计算数据通过总线发送到设备(device, GPU)上</li>
+<li>调用核函数，让设备进行并行计算</li>
+</ul>
+<p>这时主进程将立刻去做其他事（异步）。计算结束后，将计算结果下载回主机。这三件事情是和GPU相关的，因此需要用到CUDA runtime API. </p>
+<h3 id="在设备之间复制数据"><a href="#在设备之间复制数据" class="headerlink" title="在设备之间复制数据"></a>在设备之间复制数据</h3><p>将数据发送到设备上，其实就是在设备上分配一块内存（malloc），然后将主机上的数据复制过去（memcpy），CUDA-C中进行这两个操作的API和C语言很像，但稍有不同：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cudaError_t <span class="hljs-title function_">cudaMalloc</span><span class="hljs-params">(<span class="hljs-type">void</span> **devPtr,<span class="hljs-type">size_t</span> nByte)</span>;<br>cudaError_t <span class="hljs-title function_">cudaMemcpy</span><span class="hljs-params">(<span class="hljs-type">void</span> * dst,<span class="hljs-type">const</span> <span class="hljs-type">void</span> * src,<span class="hljs-type">size_t</span> count, cudaMemcpyKind kind)</span><br></code></pre></td></tr></table></figure>
+<p>比如为长度为1024个元素的浮点数组<code>float *data</code>分配，执行的语句是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">cuda <span class="hljs-title function_">cudaMalloc</span><span class="hljs-params">(&amp;data, <span class="hljs-number">1024</span>*<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>))</span>;<br></code></pre></td></tr></table></figure>
+<p>因为需要将设备上的内存地址写入<code>data</code>变量，所以这里需要传入它的指针。</p>
+<p><code>cudaMemcpy</code>的前面三个参数无需赘述，最后一个枚举变量参数指明了复制数据的<strong><em>方向</em></strong>：</p>
+<ul>
+<li>cudaMemcpyHostToHost</li>
+<li>cudaMemcpyHostToDevice</li>
+<li>cudaMemcpyDeviceToHost</li>
+<li>cudaMemcpyDeviceToDevice</li>
+</ul>
+<p>比如将主机上长度为1024的浮点数组<code>h_data</code>的数据复制到设备上浮点数组<code>d_data</code>中：</p>
+<blockquote>
+<p>主机上的空间用<code>h_</code>开头，而设备上的用<code>d_</code>，书中约定如此，这里也照搬。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">cudaMemcpy(d_data, h_data, <span class="hljs-number">1024</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), cudaMemcpyHostToDevice);<br></code></pre></td></tr></table></figure>
+<p>最后说下返回类型<code>cudaError_t</code>，如果函数成功执行，则返回<code>cudaSuccess</code>，否则返回对应的错误类型，可以使用函数<code>char* cudaGetErrorString(cudaError_t error)</code>来将错误类型转化为方便阅读的字符串。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/Paper-reading/eplace-ms/">eplace-ms Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="文章目录">≡</a><a id="color-mode" onClick="colorMode.change()" title="切换主题"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://raw.githubusercontent.com/diriLin/blog_img/main/megumi.jpg" alt="Logo"></a><h1 id="Dr"><a href="/">失学青年 diri酱</a></h1><div id="description"><p>摸鱼一念起，刹觉天地宽</p></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Heterogeneous-Parallel-Computing-with-CUDA"><span class="toc-number">1.</span> <span class="toc-text">Chapter 1: Heterogeneous Parallel Computing with CUDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-CUDA-Programming-Model"><span class="toc-number">2.</span> <span class="toc-text">Chapter 2: CUDA Programming Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E8%AE%BE%E5%A4%87%E4%B9%8B%E9%97%B4%E5%A4%8D%E5%88%B6%E6%95%B0%E6%8D%AE"><span class="toc-number">2.1.</span> <span class="toc-text">在设备之间复制数据</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
