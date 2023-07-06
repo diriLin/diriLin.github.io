@@ -72,7 +72,7 @@ cuda cudaMalloc(&data, 1024*sizeof(float));
 cudaMemcpy(d_data, h_data, 1024 * sizeof(float), cudaMemcpyHostToDevice);
 ```
 
-> `cudaMemcpy`关系到主机与设备的数据交换，因此隐式地进行了同步。
+`cudaMemcpy`关系到主机与设备的数据交换，因此隐式地进行了同步。如果需要显式的同步，需要调用`cudaDeviceSynchronize()`. 在设备上申请到的内存最后要调用`cudaFree(void *ptr)`进行释放.
 
 最后说下返回类型`cudaError_t`，如果函数成功执行，则返回`cudaSuccess`，否则返回对应的错误类型，可以使用函数`char* cudaGetErrorString(cudaError_t error)`来将错误类型转化为方便阅读的字符串。
 
@@ -119,8 +119,48 @@ RETURN_TYPE QUALIFIER function_name(argument_list);
 在定义函数的时候可以访问这些被预定义的变量：
 
 + `blockIdx` 当前线程所在的块，在网格中的三维索引
-+ `threadIdx 当前线程在块中的三维索引
++ `threadIdx` 当前线程在块中的三维索引
 + `gridDim` 网格的形状，如果在调用时直接传入一个整数`g`，则为`(g,1,1)`
 + `blockDim` 块的形状
 
 > 然后就可以根据这些信息来计算某一线程应该处理数组的哪个部分之类的……
+
+### 核函数调用计时
+
+两种方法。一种是记录调用前的CPU时间戳，调用执行结束后主机显式同步，然后记录执行结束的CPU时间戳。
+
+```c
+iStart = cpuSecond(); 
+sumMatrixOnGPU2D <<< grid, block >>>(d_MatA, d_MatB, d_MatC, nx, ny);
+cudaDeviceSynchronize(); 
+iElaps = cpuSecond() - iStart;
+```
+
+另一种是查看nvidia的工具nvprof：
+
+```shell
+$ nvprof ./sumArraysOnGPU-timer
+./sumArraysOnGPU-timer Starting... 
+Using Device 0: Tesla M2070 
+==17770== NVPROF is profiling process 17770, command: ./sumArraysOnGPU-timer 
+# 程序输出balabala
+==17770== Profiling application: ./sumArraysOnGPU-timer 
+==17770== Profiling result: 
+Time(%) Time Calls Avg Min Max Name 
+70.35% 52.667ms 3 17.556ms 17.415ms 17.800ms [CUDA memcpy HtoD] 
+25.77% 19.291ms 1 19.291ms 19.291ms 19.291ms [CUDA memcpy DtoH] 
+3.88% 2.9024ms 1 2.9024ms 2.9024ms 2.9024ms sumArraysOnGPU 
+(float*, float*, int)
+```
+
+后者更加准确，但前者可以在runtime得到报告。
+
+然后书本举了几个例子，使用不同的grid shape和block shape处理相同矩阵加法问题，引出：
+
++ 不同的config之间存在运行时间的差异（需要上述测量手段）
++ 如何寻找更好的config？靠盲猜太不科学，也浪费很多时间和计算资源。
+  + CUDA程序必须根据设备的硬件特性编写
+
+然后给了一堆查runtime和`nvidia-smi`的查信息方法，这里就不赘述了。
+
+其实我这个东西写到现在非常摆，基本没怎么沾硬件，但既然要根据硬件特性来编写，那么更深入地了解n卡是逃不掉的。
